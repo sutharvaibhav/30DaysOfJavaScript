@@ -1,3 +1,5 @@
+/*
+
 // Task 1
 
 document.getElementById("hero-section").style.display = "none";
@@ -59,4 +61,4 @@ servBt.addEventListener("mouseover", function(){
 });
 
 
-
+*/
