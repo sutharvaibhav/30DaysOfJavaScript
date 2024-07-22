@@ -56,11 +56,30 @@ let isKeyUpEvent = false;
 // }
 
 // Task 10
-// myForm.addEventListener("submit", function () {
-//   event.preventDefault();
-//   let li = document.createElement("li");
-//   li.textContent = targetInput.value;
-//   targetInput.value="";
-//   li.className = "list-item";
-//   list.appendChild(li);
-// });
+document.addEventListener("DOMContentLoaded", loadSavedData);
+
+myForm.addEventListener("submit", function () {
+  event.preventDefault();
+  let li = document.createElement("li");
+  li.textContent = targetInput.value;
+  targetInput.value = "";
+  li.className = "list-item";
+  list.appendChild(li);
+  saveDataLocally();
+});
+
+function saveDataLocally() {
+  const items = Array.from(list.children).map((item) => item.textContent);
+  localStorage.setItem("savedItems", JSON.stringify(items));
+}
+
+function loadSavedData() {
+  const savedItems = JSON.parse(localStorage.getItem("savedItems")) || [];
+  list.innerHTML = "";
+  savedItems.forEach((itemText) => {
+    const li = document.createElement("li");
+    li.textContent = itemText;
+    li.className = "list-item";
+    list.appendChild(li);
+  });
+}
